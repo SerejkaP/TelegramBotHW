@@ -1,9 +1,7 @@
 import os
-
 from dotenv import load_dotenv
-
-# Суперподробное логирование для отладки
 import logging
+
 LOGGING_LEVEL = int(os.getenv("LOGGING_LEVEL", logging.INFO))
 logging.basicConfig(level=LOGGING_LEVEL)
 
