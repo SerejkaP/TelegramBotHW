@@ -10,6 +10,7 @@ from config import TELEGRAM_BOT_TOKEN
 from utils.api_requests import get_food_info, get_weather_async
 from utils.calculation import calculate_calories, calculate_water
 from utils.visualization import get_water_visualization
+import logging
 
 
 # Профиль пользователя для хранения данных
@@ -42,7 +43,7 @@ dp = Dispatcher()
 class LoggingMiddleware(BaseMiddleware):
     async def __call__(self, handler, event: Message, data: dict):
         user = event.from_user.username
-        print(f"{event.date} Сообщение от {user}: {event.text}")
+        logging.info(f"{event.date} Сообщение от {user}: {event.text}")
         return await handler(event, data)
 
 
@@ -425,7 +426,7 @@ async def handle_callback(callback_query: CallbackQuery, state: FSMContext):
 
 # Основная функция запуска бота
 async def main():
-    print("Бот запущен!")
+    logging.info("Бот запущен!")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
